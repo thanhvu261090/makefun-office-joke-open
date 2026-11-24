@@ -16,7 +16,8 @@ def gate_check(text):
     """Return True only if the text passes the competition gate.
 
     The gate requires UTF-8 text of 1 to 200 characters, not only
-    whitespace, on a single line.
+    whitespace, on a single line, with no leading or trailing
+    whitespace.
     """
     if not isinstance(text, str):
         return False
@@ -27,6 +28,8 @@ def gate_check(text):
     if not 1 <= len(text) <= 200:
         return False
     if not text.strip():
+        return False
+    if text != text.strip():
         return False
     if "\n" in text or "\r" in text:
         return False
